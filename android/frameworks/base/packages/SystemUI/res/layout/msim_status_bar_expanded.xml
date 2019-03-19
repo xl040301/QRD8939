@@ -29,6 +29,20 @@
     android:background="@android:color/transparent"
     >
 
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:id="@+id/layout_widget"
+             > <!--android:visibility="gone"-->
+            <include
+                android:id="@+id/layout_keyguard_widgets_config"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/keyguard_widgets_config" />
+    </FrameLayout>
+    
    <include
             layout="@layout/subs_label"
             android:layout_height="@dimen/carrier_label_height"

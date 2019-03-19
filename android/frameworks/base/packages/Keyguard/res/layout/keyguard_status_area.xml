@@ -30,8 +30,13 @@
         android:layout_height="wrap_content"
         android:textColor="@color/clock_white"
         style="@style/widget_label"
+	android:shadowColor="@color/keyguard_shadow_translucent"
+	android:shadowDx="0.0"
+        android:shadowDy="1.0"
+        android:shadowRadius="3.0"
+        android:singleLine="true"
         android:gravity="center"
-        />
+        android:visibility="gone" />
     <TextView android:id="@+id/alarm_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

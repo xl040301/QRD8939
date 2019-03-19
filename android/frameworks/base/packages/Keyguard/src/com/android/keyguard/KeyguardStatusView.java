@@ -50,8 +50,10 @@ public class KeyguardStatusView extends GridLayout {
 
     private TextView mAlarmStatusView;
     private TextClock mDateView;
-    private TextClock mClockView;
-    private TextView mOwnerInfo;
+	/*majun modify for change lockscreen clock style 2015-09-12 begin*/
+    private ClockView mClockView;
+    //private TextView mOwnerInfo;
+	/*modify end */
 
     private KeyguardUpdateMonitorCallback mInfoCallback = new KeyguardUpdateMonitorCallback() {
 
@@ -65,7 +67,8 @@ public class KeyguardStatusView extends GridLayout {
             if (showing) {
                 if (DEBUG) Slog.v(TAG, "refresh statusview showing:" + showing);
                 refresh();
-                updateOwnerInfo();
+				/*majun modify for hide ownerInfo 2015-09-12 begin*/
+                //updateOwnerInfo();
             }
         }
 
@@ -82,7 +85,7 @@ public class KeyguardStatusView extends GridLayout {
         @Override
         public void onUserSwitchComplete(int userId) {
             refresh();
-            updateOwnerInfo();
+            //updateOwnerInfo();
         }
     };
 
@@ -101,7 +104,7 @@ public class KeyguardStatusView extends GridLayout {
     private void setEnableMarquee(boolean enabled) {
         if (DEBUG) Log.v(TAG, (enabled ? "Enable" : "Disable") + " transport text marquee");
         if (mAlarmStatusView != null) mAlarmStatusView.setSelected(enabled);
-        if (mOwnerInfo != null) mOwnerInfo.setSelected(enabled);
+       // if (mOwnerInfo != null) mOwnerInfo.setSelected(enabled);
     }
 
     @Override
@@ -109,40 +112,41 @@ public class KeyguardStatusView extends GridLayout {
         super.onFinishInflate();
         mAlarmStatusView = (TextView) findViewById(R.id.alarm_status);
         mDateView = (TextClock) findViewById(R.id.date_view);
-        mClockView = (TextClock) findViewById(R.id.clock_view);
-        mClockView.setEllipsize(null);
+        mClockView = (ClockView) findViewById(R.id.clock_view);
+        //mClockView.setEllipsize(null);
 
         mDateView.setShowCurrentUserTime(true);
-        mClockView.setShowCurrentUserTime(true);
-        mOwnerInfo = (TextView) findViewById(R.id.owner_info);
+        //mClockView.setShowCurrentUserTime(true);
+       // mOwnerInfo = (TextView) findViewById(R.id.owner_info);
         mLockPatternUtils = new LockPatternUtils(getContext());
         final boolean screenOn = KeyguardUpdateMonitor.getInstance(mContext).isScreenOn();
         setEnableMarquee(screenOn);
         refresh();
-        updateOwnerInfo();
+        //updateOwnerInfo();
 
         // Disable elegant text height because our fancy colon makes the ymin value huge for no
         // reason.
-        mClockView.setElegantTextHeight(false);
+       // mClockView.setElegantTextHeight(false);
     }
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mClockView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.widget_big_font_size));
+        //mClockView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+         //       getResources().getDimensionPixelSize(R.dimen.widget_big_font_size));
         mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
+        //mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+       //         getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
     }
 
     public void refreshTime() {
         mDateView.setFormat24Hour(Patterns.dateView);
         mDateView.setFormat12Hour(Patterns.dateView);
 
-        mClockView.setFormat12Hour(Patterns.clockView12);
-        mClockView.setFormat24Hour(Patterns.clockView24);
+       // mClockView.setFormat12Hour(Patterns.clockView12);
+       // mClockView.setFormat24Hour(Patterns.clockView24);
+		mClockView.updateTime();
     }
 
     private void refresh() {
@@ -176,6 +180,7 @@ public class KeyguardStatusView extends GridLayout {
         return DateFormat.format(pattern, info.getTriggerTime()).toString();
     }
 
+    /*
     private void updateOwnerInfo() {
         if (mOwnerInfo == null) return;
         String ownerInfo = getOwnerInfo();
@@ -185,7 +190,7 @@ public class KeyguardStatusView extends GridLayout {
         } else {
             mOwnerInfo.setVisibility(View.GONE);
         }
-    }
+    } */
 
     @Override
     protected void onAttachedToWindow() {

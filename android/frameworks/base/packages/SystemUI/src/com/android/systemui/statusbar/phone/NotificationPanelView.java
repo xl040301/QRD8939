@@ -80,6 +80,7 @@ public class NotificationPanelView extends PanelView implements
     private QSPanel mQsPanel;
     private LinearLayout mTaskManagerPanel;
     private KeyguardStatusView mKeyguardStatusView;
+	private FrameLayout mKeyguardLayoutWidget;
     private ObservableScrollView mScrollView;
     private TextView mClockView;
     private View mReserveNotificationSpace;
@@ -196,10 +197,12 @@ public class NotificationPanelView extends PanelView implements
         mHeader.setOnClickListener(this);
         mKeyguardStatusBar = (KeyguardStatusBarView) findViewById(R.id.keyguard_header);
         mKeyguardStatusView = (KeyguardStatusView) findViewById(R.id.keyguard_status_view);
+		mKeyguardLayoutWidget = (FrameLayout) findViewById(R.id.layout_widget);
+		
         mQsContainer = (QSContainer) findViewById(R.id.quick_settings_container);
         mQsPanel = (QSPanel) findViewById(R.id.quick_settings_panel);
         mTaskManagerPanel = (LinearLayout) findViewById(R.id.task_manager_panel);
-        mClockView = (TextView) findViewById(R.id.clock_view);
+        //mClockView = (TextView) findViewById(R.id.clock_view);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll_view);
         mScrollView.setListener(this);
         mScrollView.setFocusable(false);
@@ -289,7 +292,7 @@ public class NotificationPanelView extends PanelView implements
 
         // Update Clock Pivot
         mKeyguardStatusView.setPivotX(getWidth() / 2);
-        mKeyguardStatusView.setPivotY((FONT_HEIGHT - CAP_HEIGHT) / 2048f * mClockView.getTextSize());
+        //mKeyguardStatusView.setPivotY((FONT_HEIGHT - CAP_HEIGHT) / 2048f * mClockView.getTextSize());
 
         // Calculate quick setting heights.
         int oldMaxHeight = mQsMaxExpansionHeight;
@@ -906,6 +909,7 @@ public class NotificationPanelView extends PanelView implements
         public void run() {
             mKeyguardStatusViewAnimating = false;
             mKeyguardStatusView.setVisibility(View.GONE);
+			mKeyguardLayoutWidget.setVisibility(View.GONE);
         }
     };
 
@@ -1076,16 +1080,19 @@ public class NotificationPanelView extends PanelView implements
                     .setDuration(320)
                     .setInterpolator(PhoneStatusBar.ALPHA_IN)
                     .withEndAction(mAnimateKeyguardStatusViewVisibleEndRunnable);
+		    mKeyguardLayoutWidget.setVisibility(View.VISIBLE);
         } else if (statusBarState == StatusBarState.KEYGUARD) {
             mKeyguardStatusView.animate().cancel();
             mKeyguardStatusViewAnimating = false;
             mKeyguardStatusView.setVisibility(View.VISIBLE);
             mKeyguardStatusView.setAlpha(1f);
+			mKeyguardLayoutWidget.setVisibility(View.VISIBLE);
         } else {
             mKeyguardStatusView.animate().cancel();
             mKeyguardStatusViewAnimating = false;
             mKeyguardStatusView.setVisibility(View.GONE);
             mKeyguardStatusView.setAlpha(1f);
+			mKeyguardLayoutWidget.setVisibility(View.GONE);
         }
     }
 

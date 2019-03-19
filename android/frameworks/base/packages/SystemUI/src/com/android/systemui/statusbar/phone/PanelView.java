@@ -288,6 +288,7 @@ public abstract class PanelView extends FrameLayout {
                         && (Math.abs(h) > Math.abs(x - mInitialTouchX)
                                 || mInitialOffsetOnTouch == 0f)) {
                     mTouchSlopExceeded = true;
+                    mStatusBar.onStartClockAnimation();
                     if (waitForTouchSlop && !mTracking) {
                         if (!mJustPeeked && mInitialOffsetOnTouch != 0f) {
                             mInitialOffsetOnTouch = mExpandedHeight;
@@ -320,6 +321,7 @@ public abstract class PanelView extends FrameLayout {
 
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
+                mStatusBar.onClearClockAnimation();
                 mTrackingPointer = -1;
                 trackMovement(event);
                 if ((mTracking && mTouchSlopExceeded)

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <!-- begin added by BW_APP zhaotiefu for keyguard values 2015.7.31 -->
+    <item  name="keyguard_clockwise_divisor" format="float" type="string">2.0</item>
+    <!-- end added by BW_APP zhaotiefu for keyguard values 2015.7.31 -->
+</resources>   

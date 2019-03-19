@@ -132,7 +132,8 @@ public class KeyguardIndicationController {
             return mTransientIndication;
         }
         if (mPowerPluggedIn) {
-            return computePowerIndication();
+           // return computePowerIndication();
+           return "";
         }
         return mRestingIndication;
     }

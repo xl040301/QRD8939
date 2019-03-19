@@ -1178,13 +1178,21 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
      * Handle {@link #MSG_SIM_STATE_CHANGE}
      */
     private void handleSimStateChange(SimData simArgs) {
-        final IccCardConstants.State state = simArgs.simState;
+         /*majun modify for cann't enter pin 2015-08-19 begin*/
+         IccCardConstants.State state = simArgs.simState;
+		 /*majun modify for cann't enter pin 2015-08-19 end*/
 
         if (DEBUG) {
             Log.d(TAG, "handleSimStateChange: intentValue = " + simArgs + " "
                     + "state resolved to " + state.toString()+ " subId="+ simArgs.subId);
         }
 
+		/*majun modify for cann't enter pin 2015-08-19 begin*/
+		
+		if(state == IccCardConstants.State.UNKNOWN && IccCardConstants.State.PIN_REQUIRED == mSimState.get(simArgs.subId)){
+			state = IccCardConstants.State.NOT_READY;
+		}
+		/*wxh modify for cann't enter pin 2015-08-19 end*/
         if (state != IccCardConstants.State.UNKNOWN && state != mSimState.get(simArgs.subId)) {
             mSimState.put(simArgs.subId, state);
             if (simArgs.slotId >= 0) {

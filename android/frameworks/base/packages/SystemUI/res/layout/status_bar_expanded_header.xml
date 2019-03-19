@@ -69,7 +69,8 @@
         android:layout_alignWithParentIfMissing="true"
         android:layout_marginStart="16dp"
         android:background="@drawable/ripple_drawable"
-        android:paddingEnd="4dp" >
+        android:paddingEnd="4dp"
+        android:visibility="gone">
         <FrameLayout android:id="@+id/system_icons_container"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/status_bar_height"
@@ -102,10 +103,21 @@
         android:singleLine="true"
         android:gravity="center_vertical" />
 
+
+    <include layout="@layout/split_clock_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:id="@+id/clock"
+        />
+
     <FrameLayout
         android:id="@+id/date_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/clock"
         android:layout_marginBottom="@dimen/clock_collapsed_bottom_margin"
         android:layout_alignParentBottom="true">
         <com.android.systemui.statusbar.policy.DateView android:id="@+id/date_collapsed"
@@ -129,13 +141,7 @@
             />
     </FrameLayout>
 
-    <include layout="@layout/split_clock_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_above="@id/date_group"
-        android:id="@+id/clock"
-        />
+
 
     <Button android:id="@+id/alarm_status"
         android:layout_width="wrap_content"

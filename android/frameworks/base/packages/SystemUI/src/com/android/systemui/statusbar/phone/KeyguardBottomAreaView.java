@@ -46,6 +46,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.net.Uri;
 
 import com.android.internal.util.cm.LockscreenShortcutsHelper;
 import com.android.internal.widget.LockPatternUtils;
@@ -189,8 +190,10 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         inflatePreviews();
         mLockIcon.setOnClickListener(this);
         mLockIcon.setBackground(mTrustDrawable);
+        mLockIcon.setBackgroundResource(R.drawable.ic_lockscreen_handle_config);
         mLockIcon.setOnLongClickListener(this);
         mCameraImageView.setOnClickListener(this);
+        mCameraImageView.setBackgroundResource(R.drawable.ic_lockscreen_handle_config);
         mPhoneImageView.setOnClickListener(this);
         initAccessibility();
         updateCustomShortcuts();
@@ -393,6 +396,8 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         boolean wouldLaunchResolverActivity = PreviewInflater.wouldLaunchResolverActivity(
                 mContext, intent, mLockPatternUtils.getCurrentUser());
         if (intent == SECURE_CAMERA_INTENT && !wouldLaunchResolverActivity) {
+            intent.setFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivityAsUser(intent, UserHandle.CURRENT);
         } else {
 

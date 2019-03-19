@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- date and time. reserved item -->
+        <FrameLayout
+            android:layout_width="@dimen/datetime_width"
+            android:layout_height="@dimen/datetime_height"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/time_margintop"
+            android:layout_marginLeft="@dimen/time_marginleft"
+            android:id="@+id/layout_date_time_widget"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/layout_date_time">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/keyguard_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-6dp"
+                        android:layout_gravity="bottom"
+                        android:text="@string/kg_time"
+                        android:textColor="@android:color/white"
+                        android:textSize="50sp" />
+
+                    <TextView
+                        android:id="@+id/keyguard_ampm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-6dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/kg_am"
+                        android:textColor="@android:color/white"
+                        android:textSize="40sp" />
+
+                </LinearLayout>
+                    <TextView
+                        android:id="@+id/keyguard_date_big"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="@string/kg_date"
+                        android:textColor="@android:color/white"
+                        android:textSize="30sp" />
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/layout_date_time_small">
+
+                <TextView
+                    android:id="@+id/keyguard_time_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kg_time"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"/>
+                <TextView
+                    android:id="@+id/keyguard_date_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/kg_time"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- date standard -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/date_margintop"
+            android:layout_marginLeft="@dimen/date_marginleft"
+            android:id="@+id/layout_date_stand"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/keyguard_date_stand"
+                android:layout_width="120dp"
+                android:layout_height="22dp"
+                android:textSize="19sp"
+                android:gravity="center"
+                android:text="@string/kg_time"
+                android:textColor="#ff6200"/>
+            <TextView
+                android:id="@+id/keyguard_week_stand"
+                android:layout_width="120dp"
+                android:layout_height="25dp"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="22dp"
+                android:text="@string/kg_time"
+                android:textColor="#ff6200"/>
+        </FrameLayout>
+
+        <!-- battery -->
+        <LinearLayout
+        	android:id="@+id/battery_status_view"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/battery_margintop"
+            android:layout_marginLeft="@dimen/battery_marginleft">
+            
+            <TextView android:id="@+id/battery_level_text"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"/>
+                
+        </LinearLayout>
+        
+        
+        <!-- ownerInfo -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/ownerinfo_margintop"
+            android:layout_marginLeft="@dimen/ownerinfo_marginleft">
+        <TextView
+            android:id="@+id/owner_info"
+            android:layout_width="205dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:textColor="@color/ownerinfo_color"
+            android:textSize="@dimen/ownerinfo_label_font_size"
+            android:shadowColor="#B0000000"  
+            android:shadowRadius="3.0"  
+            android:shadowDx="3.0"  
+            android:shadowDy="3.0" 
+            android:ellipsize="marquee"
+            android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- miss call and unread sms -->
+        <!-- Bug 42349 20141230 wangdabin begin -->
+        <!-- Bug 42469 20150106 wangdabin begin -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/misscall_margintop"
+            android:layout_marginLeft="@dimen/misscall_marginleft"
+            android:orientation="vertical"
+            android:id="@+id/layout_miss_call_button"
+            android:background="@anim/keyguard_missed_call_addition" 
+            android:visibility="gone" >
+            <ImageView
+                android:id="@+id/call_button_icon"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:src="@drawable/ic_call_button"/>
+
+            <LinearLayout
+                   android:id="@+id/call_status_number_icon"
+                   android:layout_width="22dp"
+                  android:layout_height="22dp"
+                  android:layout_marginLeft="40dp"
+                  android:layout_toRightOf ="@id/call_button_icon"
+                  android:background="@drawable/ic_notification_status_number"
+		  android:visibility="gone">
+                  
+             <TextView
+                android:id="@+id/call_status_number_text"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+		android:visibility="gone" />       
+             </LinearLayout>
+                
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unreadsms_margintop"
+            android:layout_marginLeft="@dimen/unreadsms_marginleft"
+            android:orientation="vertical"
+            android:id="@+id/layout_unread_sms_button"
+            android:background="@anim/keyguard_unread_sms_addition" 
+             >
+            <ImageView
+                android:id="@+id/sms_call_icon"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:src="@drawable/ic_sms_button"/>
+                 
+             <LinearLayout
+                   android:id="@+id/sms_status_number_icon"
+                   android:layout_width="22dp"
+                  android:layout_height="22dp"
+                  android:layout_marginLeft="40dp"
+                  android:layout_toRightOf ="@id/sms_call_icon"
+                  android:background="@drawable/ic_notification_status_number"
+		  android:visibility="gone">
+                  
+             <TextView
+                android:id="@+id/sms_status_number_text"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+		android:visibility="gone"/>
+                  
+         </LinearLayout>
+                 
+        </FrameLayout>
+        <!-- Bug 42469 20150106 wangdabin end -->
+        <!-- Bug 42349 20141230 wangdabin end -->
+
+        <!-- miss call and unread sms widget -->
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="420dip"
+            android:layout_marginLeft="75dip"
+            android:clickable="true"
+            android:layout_below="@id/battery_level_text">
+            <include
+                android:id="@+id/keyguard_missed_call_widget"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                layout="@layout/keyguard_widget_miss_unread_config"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="470dip"
+            android:layout_marginLeft="75dip"
+            android:clickable="true"
+            android:layout_below="@id/keyguard_missed_call_widget">
+            <include
+                android:id="@+id/keyguard_unread_sms_widget"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                layout="@layout/keyguard_widget_miss_unread_config"
+                android:visibility="gone" />
+        </FrameLayout>
+    </FrameLayout>
+
+        <!-- clock -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/clock_margintop"
+        android:layout_marginLeft="0dip"
+        android:id="@+id/layout_widget_clock"
+        android:visibility="gone">
+        <com.android.systemui.keyguard.KeyguardWidgetClock
+            android:id="@+id/widget_clock"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+    </FrameLayout>
+</FrameLayout>

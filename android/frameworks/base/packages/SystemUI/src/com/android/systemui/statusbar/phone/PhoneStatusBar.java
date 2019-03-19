@@ -32,6 +32,9 @@ import static com.android.systemui.statusbar.phone.BarTransitions.MODE_TRANSLUCE
 import static com.android.systemui.statusbar.phone.BarTransitions.MODE_TRANSPARENT;
 import static com.android.systemui.statusbar.phone.BarTransitions.MODE_WARNING;
 
+import com.android.systemui.keyguard.KeyguardWidgetManager;
+import android.graphics.drawable.AnimationDrawable;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.TimeInterpolator;
@@ -389,6 +392,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     private int mNavigationIconHints = 0;
     private HandlerThread mHandlerThread;
+	
+	private KeyguardWidgetManager mWidgetManager;
+	private FrameLayout widgetView;
 
     // ensure quick settings is disabled until the current user makes it through the setup wizard
     private boolean mUserSetup = false;
@@ -707,6 +713,20 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mNotificationPanel.setBackground(new FastColorDrawable(context.getResources().getColor(
                     R.color.notification_panel_solid_background)));
         }
+        
+        
+		widgetView = (FrameLayout) mNotificationPanel.findViewById(R.id.layout_widget);
+		widgetView.setBackgroundResource(R.anim.keyguard_clock_gear_addition);
+        widgetView.setVisibility(View.VISIBLE);
+		View keyguardWidgetsView = mNotificationPanel.findViewById(R.id.layout_keyguard_widgets_config);
+		if (mWidgetManager == null) {
+                mWidgetManager = KeyguardWidgetManager.getInstance();
+        }
+        mWidgetManager.setKeyguardWidgetManagerView(mContext, keyguardWidgetsView, widgetView);
+        //mWidgetManager.registerContentObserver();
+
+
+		
         if (ENABLE_HEADS_UP) {
             mHeadsUpNotificationView =
                     (HeadsUpNotificationView) View.inflate(context, R.layout.heads_up, null);
@@ -3270,6 +3290,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 notifyHeadsUpScreenOn(false);
                 finishBarAnimations();
                 resetUserExpandedStates();
+                onClearClockAnimation();
             }
             else if (Intent.ACTION_SCREEN_ON.equals(action)) {
                 mScreenOn = true;
@@ -4071,6 +4092,20 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     public void onUnlockHintStarted() {
         mKeyguardIndicationController.showTransientIndication(R.string.keyguard_unlock);
+    }
+    
+   public void onStartClockAnimation() {
+        if (widgetView != null) {
+        	AnimationDrawable animationDrawable = (AnimationDrawable) widgetView.getBackground();
+            animationDrawable.start();
+        }
+    }
+    
+   public void onClearClockAnimation() {
+        if (widgetView != null) {
+        	AnimationDrawable animationDrawable = (AnimationDrawable) widgetView.getBackground();
+            animationDrawable.stop();
+        }
     }
 
     public void onHintFinished() {

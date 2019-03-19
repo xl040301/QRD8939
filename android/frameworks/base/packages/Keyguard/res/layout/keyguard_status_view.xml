@@ -25,8 +25,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    androidprv:layout_maxWidth="@dimen/keyguard_security_width"
-    androidprv:layout_maxHeight="@dimen/keyguard_security_height"
+    android:background="@color/keyguard_status_view_background"
+    android:focusable="true"
     android:gravity="center_horizontal|top">
     <LinearLayout
         android:id="@+id/keyguard_clock_container"
@@ -34,20 +34,26 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|top"
         android:orientation="vertical" >
-        <TextClock
+<!---<TextClock
             android:id="@+id/clock_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_horizontal|top"
             android:textColor="@color/clock_white"
             android:singleLine="true"
             style="@style/widget_big_thin"
             android:format12Hour="@string/keyguard_widget_12_hours_format"
             android:format24Hour="@string/keyguard_widget_24_hours_format"
-            android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
+            android:layout_marginBottom="@dimen/bottom_text_spacing_digital" /> -->
+	    
+	    
+ <include 
+	layout="@layout/keyguard_clock_view"
+	android:visibility="gone" />
 
         <include layout="@layout/keyguard_status_area" />
-        <TextView
+	
+        <!--<TextView
             android:id="@+id/owner_info"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -58,7 +64,7 @@
             android:textColor="@color/clock_gray"
             android:textSize="@dimen/widget_label_font_size"
             android:ellipsize="marquee"
-            android:singleLine="true" />
+            android:singleLine="true" />-->
 
     </LinearLayout>
 </com.android.keyguard.KeyguardStatusView>
